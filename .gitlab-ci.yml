@@ -1,0 +1,36 @@
+---
+stages:
+  - lint
+  - build
+
+lint-dockerfile:
+  stage: lint
+  image: pipelinecomponents/hadolint:0.27.0
+  variables:
+    TAG_IMAGE_VERSION: DL3006
+    PIN_APT_PKG_VERSION: DL3008
+  script:
+    - find -name Dockerfile |
+      xargs hadolint --ignore ${TAG_IMAGE_VERSION}
+                     --ignore ${PIN_APT_PKG_VERSION}
+
+lint-markdown:
+  stage: lint
+  image: pipelinecomponents/markdownlint-cli2:0.13.0
+  script:
+    - markdownlint-cli2 '**/*.md'
+
+lint-yaml:
+  stage: lint
+  image: pipelinecomponents/yamllint:0.33.0
+  script:
+    - find -name '*.yml' | xargs yamllint --strict
+
+build-image:
+  stage: build
+  image: docker:27.4.1
+  variables:
+    IMAGE_GCC: conan:gcc11-${CI_JOB_ID}
+  script:
+    - docker build -t $IMAGE_GCC gcc
+    - docker image rm $IMAGE_GCC

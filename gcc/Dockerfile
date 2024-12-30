@@ -1,13 +1,15 @@
 FROM conanio/gcc11-ubuntu18.04
 
-RUN pip install --upgrade conan
-RUN conan profile detect
-RUN conan remote update conancenter --url="https://center2.conan.io"
+ARG CONAN_VERSION=2.11.0
+
+RUN pip install --no-cache-dir --upgrade conan==${CONAN_VERSION} && \
+    conan profile detect && \
+    conan remote update conancenter --url="https://center2.conan.io"
 
 USER root
 
-RUN apt update && \
-    apt install -y \
+RUN apt-get update && \
+    apt-get install --no-install-recommends --yes \
         libfontenc-dev \
         libgl-dev \
         libice-dev \
@@ -41,6 +43,7 @@ RUN apt update && \
         libxtst-dev \
         libxv-dev \
         uuid-dev \
-        xkb-data
+        xkb-data && \
+    rm -rf /var/lib/apt/lists/*
 
 USER conan
