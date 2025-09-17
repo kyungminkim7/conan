@@ -8,7 +8,8 @@ RUN apt-get update && \
         clang-tidy \
         cmake \
         make \
-        pipx && \
+        pipx \
+        sudo && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a 'conan' user with passwordless sudo
@@ -25,5 +26,5 @@ ENV PATH="/home/conan/.local/bin:$PATH"
 
 # Install Python and Conan
 # hadolint ignore=DL3013
-RUN pipx install conan cmakelang cpplint ruff && \
+RUN pipx install --pip-args='--no-cache-dir' conan cmakelang cpplint ruff && \
     conan profile detect
