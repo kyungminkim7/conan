@@ -1,0 +1,30 @@
+---
+name: CI
+
+on: push
+
+jobs:
+  lint-dockerfile:
+    runs-on: ubuntu-latest
+    container:
+      image: pipelinecomponents/hadolint:0.27.0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lint Dockerfiles
+        run: |
+          find -name Dockerfile | \
+            xargs hadolint --ignore DL3006 \
+                           --ignore DL3008
+
+  lint-markdown:
+    runs-on: ubuntu-latest
+    container:
+      image: pipelinecomponents/markdownlint-cli2:0.13.0
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lint Markdown files
+        run: markdownlint-cli2 '**/*.md'
