@@ -1,7 +1,5 @@
 FROM ubuntu:24.04
 
-ARG PYTHON_VERSION=3.13.7
-
 # Install dependencies
 RUN apt-get update && \
     apt-get install --no-install-recommends --yes \
