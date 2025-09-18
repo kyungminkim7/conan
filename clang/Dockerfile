@@ -6,9 +6,59 @@ RUN apt-get update && \
         clang-format \
         clang-tidy \
         cmake \
+        libfontenc-dev \
+        libgl-dev \
+        libgl1-mesa-dev \
+        libice-dev \
+        libsm-dev \
+        libx11-xcb-dev \
+        libxaw7-dev \
+        libxcb-composite0-dev \
+        libxcb-cursor-dev \
+        libxcb-dri2-0-dev \
+        libxcb-dri3-dev \
+        libxcb-dri3-dev \
+        libxcb-ewmh-dev \
+        libxcb-glx0-dev \
+        libxcb-icccm4-dev \
+        libxcb-image0-dev \
+        libxcb-keysyms1-dev \
+        libxcb-present-dev \
+        libxcb-randr0-dev \
+        libxcb-render-util0-dev \
+        libxcb-render0-dev \
+        libxcb-res0-dev \
+        libxcb-shape0-dev \
+        libxcb-sync-dev \
+        libxcb-util-dev \
+        libxcb-util0-dev \
+        libxcb-xfixes0-dev \
+        libxcb-xinerama0-dev \
+        libxcb-xkb-dev \
+        libxcomposite-dev \
+        libxcursor-dev \
+        libxdamage-dev \
+        libxext-dev \
+        libxfixes-dev \
+        libxi-dev \
+        libxinerama-dev \
+        libxkbfile-dev \
+        libxmu-dev \
+        libxmuu-dev \
+        libxpm-dev \
+        libxrandr-dev \
+        libxrender-dev \
+        libxres-dev \
+        libxss-dev \
+        libxt-dev \
+        libxtst-dev \
+        libxv-dev \
+        libxxf86vm-dev \
         make \
         pipx \
-        sudo && \
+        pkg-config \
+        sudo \
+        uuid-dev && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --chmod=0440 sudoers.d/ubuntu /etc/sudoers.d/
