@@ -12,17 +12,15 @@ RUN apt-get update && \
         sudo && \
     rm -rf /var/lib/apt/lists/*
 
-# Create a 'conan' user with passwordless sudo
-RUN useradd --create-home --shell /bin/bash conan
-COPY --chmod=0440 sudoers.d/conan /etc/sudoers.d/conan
+COPY --chmod=0440 sudoers.d/ubuntu /etc/sudoers.d/
 
-USER conan
-WORKDIR /home/conan
+USER ubuntu
+WORKDIR /home/ubuntu
 
 # Set default C and C++ compilers to clang
 ENV CC=clang
 ENV CXX=clang++
-ENV PATH="/home/conan/.local/bin:$PATH"
+ENV PATH="/home/ubuntu/.local/bin:$PATH"
 
 # Install Python and Conan
 # hadolint ignore=DL3013
