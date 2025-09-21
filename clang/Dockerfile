@@ -6,6 +6,7 @@ RUN apt-get update && \
         clang-format \
         clang-tidy \
         cmake \
+        git \
         libfontenc-dev \
         libgl-dev \
         libgl1-mesa-dev \
